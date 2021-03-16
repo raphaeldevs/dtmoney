@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react'
 
 import Modal from 'react-modal'
 
+import { api } from '../../services/api'
+
 import { Container, TransactionTypeContainer, Button } from './styles'
 
 import closeImg from '../../assets/close.svg'
@@ -34,7 +36,7 @@ export function NewTransactionModal({
       type
     }
 
-    console.log(newTransaction)
+    api.post('transactions', newTransaction)
   }
 
   return (
