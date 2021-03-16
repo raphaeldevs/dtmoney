@@ -10,6 +10,8 @@ export const GlobalStyle = createGlobalStyle`
     --green: #33CC95;
     --text-title: #363F5F;
     --text-body: #969CB2;
+    --input-background: #e7e9ee;
+    --input-border-color: #d7d7d7;
   }
 
   * {
