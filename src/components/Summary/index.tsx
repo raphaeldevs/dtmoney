@@ -11,30 +11,74 @@ import totalImg from '../../assets/total.svg'
 export function Summary() {
   const { transactions } = useContext(TransactionsContext)
 
+  const summary = transactions.reduce((accumulator, transaction) => {
+      type SummaryOperation = {
+        [key: string]: () => {
+          deposits: number
+          withdraws: number
+          total: number
+        }
+      }
+
+      const operation: SummaryOperation = {
+        deposit: () => {
+          accumulator.deposits += transaction.amount
+          accumulator.total += transaction.amount
+
+          return accumulator
+        },
+        withdraw: () => {
+          accumulator.withdraws -= transaction.amount
+          accumulator.total -= transaction.amount
+
+          return accumulator
+        }
+      }
+
+      return operation[transaction.type]()
+    },
+    { deposits: 0, withdraws: 0, total: 0 }
+  )
+
   return (
     <Container>
       <div>
         <header>
           <p>Entradas</p>
-          <img src={incomeImg} alt="Entradas"/>
+          <img src={incomeImg} alt="Entradas" />
         </header>
-        <strong>R$ 1.000,00</strong>
+        <strong>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(summary.deposits)}
+        </strong>
       </div>
-      
+
       <div>
         <header>
           <p>Saídas</p>
-          <img src={outcomeImg} alt="Saídas"/>
+          <img src={outcomeImg} alt="Saídas" />
         </header>
-        <strong>- R$ 500,00</strong>
+        <strong>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(summary.withdraws)}
+        </strong>
       </div>
 
       <div className="highlight-background">
         <header>
           <p>Total</p>
-          <img src={totalImg} alt="Saídas"/>
+          <img src={totalImg} alt="Saídas" />
         </header>
-        <strong>R$ 500,00</strong>
+        <strong>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          }).format(summary.total)}
+        </strong>
       </div>
     </Container>
   )
