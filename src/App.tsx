@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { GlobalStyle } from './styles/global'
 
-import { TransactionsProvider } from './TransactionsContext'
+import { TransactionsProvider } from './hooks/useTransactions'
 
 import { Header } from './components/Header'
 import { Dashboard } from './components/Dashboard'
