@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  /* margin-top: 2rem; */
-
+  overflow-x: auto;
+  
   table {
     width: 100%;
     
@@ -16,7 +16,6 @@ export const Container = styled.div`
       color: var(--text-body);
 
       line-height: 1.5rem;
-
     }
 
     td {
