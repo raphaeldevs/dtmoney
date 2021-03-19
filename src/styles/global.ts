@@ -85,6 +85,20 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 0.25rem;
 
     position: relative;
+
+    animation: openModal .3s ease-out forwards;
+
+    @keyframes openModal {
+      from {
+        opacity: 0;
+        transform: translateY(25%)
+      } 
+      
+      to {
+        opacity: 1;
+        transform: translateY(0%)
+      }
+    }
   }
 
   .react-modal-close {
@@ -99,6 +113,12 @@ export const GlobalStyle = createGlobalStyle`
 
     &:hover {
       filter: brightness(0.8);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .react-modal-content {
+      max-width: 90%;
     }
   }
 `
