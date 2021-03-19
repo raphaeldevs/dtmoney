@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
@@ -22,7 +22,7 @@ export const Container = styled.div`
     &.highlight-background {
       background: var(--green);
 
-      color: #FFF;
+      color: #fff;
     }
 
     header {
@@ -48,4 +48,4 @@ export const Container = styled.div`
   @media (max-width: 280px) {
     grid-template-columns: repeat(3, 100%);
   }
-`;
+`
