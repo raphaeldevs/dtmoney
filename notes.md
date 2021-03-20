@@ -129,6 +129,7 @@ createServer({
       return schema.create('transaction', newTransaction)
 
       // schema.create('tableName', { ...data })
+      // insert data in tableName
     })
   }
 })
