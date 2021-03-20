@@ -2,6 +2,9 @@ import { useTransactions } from '../../hooks/useTransactions'
 
 import { formatMoney, formatDate } from '../../utils'
 
+import editImg from '../../assets/edit.svg'
+import deleteImg from '../../assets/delete.svg'
+
 import { Container } from './styles'
 
 export function TransactionsTable() {
@@ -30,6 +33,15 @@ export function TransactionsTable() {
               <td>{transaction.category}</td>
               <td>
                 {formatDate(new Date(transaction.createdAt))}
+              </td>
+              <td>
+                <button type="button" title="Editar transação">
+                  <img src={editImg} alt="caneta"/>
+                </button>
+
+                <button type="button" title="Excluir transação">
+                  <img src={deleteImg} alt="lixeira"/>
+                </button>
               </td>
             </tr>
           ))}

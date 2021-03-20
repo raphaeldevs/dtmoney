@@ -8,6 +8,10 @@ export const Container = styled.div`
     
     border-spacing: 0 0.5rem;
 
+    th, td {
+      width: 100%;
+    }
+
     th {
       padding: 1rem 2rem;
       
@@ -29,8 +33,28 @@ export const Container = styled.div`
 
       border-radius: 0.25rem;
 
+      white-space: nowrap;
+
+      button {
+        display: inline-block;
+
+        background: transparent;
+
+        border: none;
+
+        font-size: 0;
+
+        & + button {
+          margin-left: 1rem;
+        }
+      }
+
       &:first-child {
         color: var(--text-title);
+      }
+
+      &:last-child {
+        text-align: center;
       }
 
       &.deposit {
