@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { createServer, Model } from 'miragejs'
+import { createServer, Model, Response } from 'miragejs'
 
 import { App } from './App'
 
@@ -23,8 +23,8 @@ createServer({
         },
         {
           id: 2,
-          title: 'Resgate CDI',
-          amount: 5000,
+          title: 'Dividendos Inter',
+          amount: 3357.83,
           type: 'deposit',
           category: 'Investimentos',
           createdAt: new Date('2021-03-16 08:03:14')
@@ -52,6 +52,24 @@ createServer({
       const newTransaction = JSON.parse(request.requestBody)
 
       return schema.create('transaction', newTransaction)
+    })
+
+    this.put('/transactions/:id', (schema, request) => {
+      const { id: transactionId } = request.params
+
+      const updatedTransaction = JSON.parse(request.requestBody)
+
+      schema.db.transactions.update(transactionId, updatedTransaction)
+
+      return {}
+    })
+
+    this.delete('/transactions/:id', (schema, request) => {
+      const { id: transactionId } = request.params
+
+      schema.db.transactions.remove(transactionId)
+
+      return {}
     })
   }
 })
