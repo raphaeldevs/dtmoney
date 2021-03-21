@@ -3,4 +3,5 @@ export const { format: formatMoney } = new Intl.NumberFormat('pt-BR', {
   currency: 'BRL'
 })
 
-export const { format: formatDate } = new Intl.DateTimeFormat('pt-BR')
+export const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('pt-BR').format(new Date(date))
