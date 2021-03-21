@@ -8,7 +8,7 @@ import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import totalImg from '../../assets/total.svg'
 
-type SummaryReduceOperation = {
+type SummaryReduceOperations = {
   [operationName: string]: () => void
 }
 
@@ -18,7 +18,7 @@ export function Summary() {
   const summary = transactions.reduce((accumulator, transaction) => {
       const { type, amount } = transaction
 
-      const operation: SummaryReduceOperation = {
+      const operation: SummaryReduceOperations = {
         deposit: () => {
           accumulator.deposits += amount
           accumulator.total += amount
