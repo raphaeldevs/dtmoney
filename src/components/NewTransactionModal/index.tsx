@@ -3,6 +3,7 @@ import { FormEvent, useState } from 'react'
 import Modal from 'react-modal'
 
 import { useTransactions } from '../../hooks/useTransactions'
+import { useTransactionModal } from '../../hooks/useTransactionModal'
 
 import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
@@ -12,21 +13,18 @@ import { Container, TransactionTypeContainer, Button } from './styles'
 
 Modal.setAppElement('#root')
 
-interface NewTransactionModalProps {
-  isOpen: boolean
-  onRequestClose: () => void
-}
-
-export function NewTransactionModal({
-  isOpen,
-  onRequestClose
-}: NewTransactionModalProps) {
+export function NewTransactionModal() {
   const { createTransaction } = useTransactions()
+  const { isNewTransationModalOpen, handleCloseModal } = useTransactionModal()
 
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState(0)
   const [category, setCategory] = useState('')
   const [type, setType] = useState('deposit')
+
+  function onRequestClose() {
+    handleCloseModal('newTransaction')
+  }
 
   async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault()
@@ -47,7 +45,7 @@ export function NewTransactionModal({
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isNewTransationModalOpen}
       onRequestClose={onRequestClose}
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
