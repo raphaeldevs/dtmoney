@@ -1,4 +1,4 @@
-import { Transaction, useTransactions } from '../../hooks/useTransactions'
+import { useTransactions } from '../../hooks/useTransactions'
 import { useTransactionModal } from '../../hooks/useTransactionModal'
 
 import { formatMoney, formatDate } from '../../utils'
@@ -16,9 +16,9 @@ export function TransactionsTable() {
   } = useTransactions()
   const { handleOpenModal } = useTransactionModal()
 
-  function handleEditModal(transaction: Transaction) {
+  function handleEditModal(id: number) {
     handleOpenModal('editTransaction')
-    setCurrentEditingTransaction(transaction)
+    setCurrentEditingTransaction(id)
   }
 
   function handleDeleteTransaction(id: number) {
@@ -53,7 +53,7 @@ export function TransactionsTable() {
                 <button
                   type="button"
                   title="Editar transação"
-                  onClick={() => handleEditModal(transaction)}
+                  onClick={() => handleEditModal(transaction.id)}
                 >
                   <img src={editImg} alt="caneta" />
                 </button>

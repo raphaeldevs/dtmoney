@@ -27,9 +27,12 @@ interface TransactionsContextData {
   transactions: Transaction[]
   editingTransaction: Transaction
   createTransaction: (newTrasaction: TransactionInput) => Promise<void>
-  editTransaction: (id: number, updatedTransaction: TransactionInput) => Promise<void>
+  editTransaction: (
+    id: number,
+    updatedTransaction: TransactionInput
+  ) => Promise<void>
   deleteTransaction: (id: number) => Promise<void>
-  setCurrentEditingTransaction: (transaction: Transaction) => void
+  setCurrentEditingTransaction: (id: number) => void
 }
 
 const TransactionsContext = createContext({} as TransactionsContextData)
@@ -55,11 +58,16 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     setTransactions([...transactions, transaction])
   }
 
-  async function editTransaction(id: number, updatedTransaction: TransactionInput) {
+  async function editTransaction(
+    id: number,
+    updatedTransaction: TransactionInput
+  ) {
     await api.put<Transaction>(`transactions/${id}`, updatedTransaction)
 
     const updatedTransactions = transactions.map(transaction => {
-      return transaction.id === id ? {...transaction, ...updatedTransaction} : transaction
+      return transaction.id === id
+        ? { ...transaction, ...updatedTransaction }
+        : transaction
     })
 
     setTransactions(updatedTransactions)
@@ -75,8 +83,12 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     setTransactions(updatedTransactions)
   }
 
-  function setCurrentEditingTransaction(transaction: Transaction) {
-    setEditingTransaction(transaction)
+  function setCurrentEditingTransaction(id: number) {
+    const editingTransaction =
+      transactions.find(transaction => transaction.id === id) ??
+      ({} as Transaction)
+
+    setEditingTransaction(editingTransaction)
   }
 
   const contextValue = {
