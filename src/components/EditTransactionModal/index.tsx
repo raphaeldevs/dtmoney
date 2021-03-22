@@ -27,7 +27,7 @@ export function EditTransactionModal() {
     setTitle(editingTransaction.title)
     setType(editingTransaction.type)
     setCategory(editingTransaction.category)
-  }, [editTransaction])
+  }, [editingTransaction])
 
   function onRequestClose() {
     handleCloseModal('editTransaction')
