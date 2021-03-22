@@ -131,6 +131,29 @@ createServer({
       // schema.create('tableName', { ...data })
       // insert data in tableName
     })
+
+    // PUT http://127.0.0.1:PORT/api/transactions/:id
+    this.put('/transactions/:id', (schema, request) => {
+      const { id: transactionId } = request.params
+
+      const updatedTransaction = JSON.parse(request.requestBody)
+
+
+      schema.db.transactions.update(transactionId, updatedTransaction)
+      // schema.db.tableNameInPlural.update(ID to update, { ...data to update })
+
+      return {}
+    })
+
+    // DELETE http://127.0.0.1:PORT/api/transactions/:id
+    this.delete('/transactions/:id', (schema, request) => {
+      const { id: transactionId } = request.params
+
+      schema.db.transactions.remove(transactionId)
+      // schema.db.transactions.remove(ID to remove)
+
+      return {}
+    })
   }
 })
 ```
